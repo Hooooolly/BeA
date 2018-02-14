@@ -26,18 +26,18 @@ If you have a custom topology you can run the command as shown in the picture, I
 
 (note: your custom topology files will need to be located in the mininet/custom folder)
 
-	=== RYU ===
+# RYU 
 	Then open up a second terminal window and navigate to either "behave/simple_switch" or "behave/rest_firewall"
 	Once you are in the folder containing the "steps" folder and a ".feature" file run the command "behave"
 
-	![screenshot 71](https://user-images.githubusercontent.com/25207378/29029921-efdd5c78-7b4e-11e7-8f21-f2aee133b25b.png)
-	(ex: simple_switch)
+![screenshot 71](https://user-images.githubusercontent.com/25207378/29029921-efdd5c78-7b4e-11e7-8f21-f2aee133b25b.png)
+(ex: simple_switch)
 
-	As you can see now, when you run a pingall test on the mininet network there is now a connection and all packets have been recieved
+As you can see now, when you run a pingall test on the mininet network there is now a connection and all packets have been recieved
 
 
-	=== ONOS ===
-	To run a simple example of Service Function Chaining (SFC) through ONOS platform (assuming ONOS is installed on the vm), start ONOS locally. Open a tab of the Terminal and enter ONOS directory:
+# ONOS
+To run a simple example of Service Function Chaining (SFC) through ONOS platform (assuming ONOS is installed on the vm), start ONOS locally. Open a tab of the Terminal and enter ONOS directory:
 
 	ubuntu@sdnhubvm:~$ cd onos  
 
