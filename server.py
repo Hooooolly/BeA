@@ -1,8 +1,8 @@
 #################################################
-###  Behave-Driven Network Management Server  ###
+###    Behavior-Driven Architecture  Server   ###
 ### Jiayi Wang, Thomas Merod, Flavio Esposito ###
 ### St Louis University, Computer Science Dep.###
-###        Last Edit: Oct 9, 2017             ###
+###        Last Edit: April 28, 2018          ###
 #################################################
 
 import socket
@@ -16,9 +16,9 @@ from datetime import datetime
 #GLOBAL VARs#
 
 
-version = '1.0'
+version = '1.01'
 IP = 'localhost'
-port = 10002
+port = 10000
 
 Controller = 'Ryu'
 
@@ -36,7 +36,7 @@ Reply = 'RPL'
 #Actions#
 Create = 'create feature'
 Alter = 'alter feature'
-Excute = 'excute'
+Execute = 'execute'
 SyncList = 'sync list'
 
 
@@ -53,8 +53,8 @@ Blacklist = 'blacklist'
 Whitelist = 'whitelist'
 
 #Root Path#
-WD = '' #Working directory
-WDB = '' #Working directory/beheave
+WD = os.popen("echo $BeA_ROOT").read().strip('\n') #root directory
+WDB = WD + '/behave' #root directory/beheave
 
 
 #####HELPER FUNCTIONS####
@@ -66,52 +66,26 @@ def sp(list,spliter):
         temp = temp+i + spliter
     return temp[:-len(spliter)]
 
-def pwd():
-    #Feeding the working directory global variable, return 1 if success.
-    global WD, WDB
-    process = subprocess.Popen(['/bin/bash'], shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-    process.stdin.write('echo $BDNM_ROOT\n')
-    WD = process.stdout.readline().strip('\n')
-    WDB = WD + '/behave'
-    process.terminate()
-    #print WD
-    #print WDB
-
-    if WD == '':
-        return 0
-    else:
-        return 1
-
 
 ####FUNCTIONS####
 
 def ServiceExistCheck(Servicename):
     #Check if the folder with the servicename exist under beheave folder, return True if exist
     print 'namecheck function'
+    print WDB
     folder = WDB+'/'+ Servicename
-    #print 'folder: '+ folder
-    process = subprocess.Popen(['/bin/bash'], shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-    commend = "test -d " +folder+ " && echo 1 || echo 0\n"
-    #print commend
-    process.stdin.write(commend)
-    out = process.stdout.readline().strip('\n')
-    #print out
-    process.terminate()
-    if out == '1':
-        return True
-    else:
-        return False
+    return os.path.isdir(folder)
+  
 
-
-def Excution(service):
-    ##Excute a feature and add to excution.log under log folders
+def Execution(service):
+    ##Execute a feature and add to execution.log under log folders
     print 'Excution function'
     process = subprocess.Popen(['/bin/bash'], shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     
-    commend = 'cd '+ WDB +'/'+service+' && behave\n'
-    process.stdin.write(commend)
+    command = 'cd '+ WDB +'/'+service+' && behave\n'
+    process.stdin.write(command)
     result=''
-    file=open(WD+'/log/excution.log','a')
+    file=open(WD+'/log/execution.log','a')
     file.write(str(datetime.now())+'\n')
     for i in range(6):
         temp = process.stdout.readline()
@@ -166,11 +140,10 @@ def listOp(listName, content):
     
 def action(action, contentType, content):
     print "Action Function"
-    if action==Excute and contentType == ServiceName:
-        print 'here'
+    if action==Execute and contentType == ServiceName:
         if ServiceExistCheck(content)==True:
 
-            result = Excution(content)
+            result = Execution(content)
             
             return sp([Reply ,action ,ServiceName,replySuccess,result],spliter)
         else:
@@ -221,10 +194,6 @@ sock.bind(server_address)
 
 sock.listen(1)
 
-if pwd() == 0:
-    print 'error getting directory'
-    connection.sendall(replyFail)
-    exit()
 
 while True:
     

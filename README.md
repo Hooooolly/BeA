@@ -60,4 +60,4 @@ To exit out of the behave file simply enter "ctrl+c" and for mininet enter ">exi
 
 
 Extra note:
-Please remember to put "export BDNM_ROOT=~/bdnm" or in the .bashrc and source it.
+Please remember to put "export BeA_ROOT=~/BeA" in the .bashrc and source it.
