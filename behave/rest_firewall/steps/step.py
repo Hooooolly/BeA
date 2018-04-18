@@ -5,14 +5,12 @@ import socket
 import sys
 import subprocess
 
-process = subprocess.Popen(['/bin/bash'], shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-process.stdin.write('echo $BDNM_ROOT\n')
-WD = process.stdout.readline().strip('\n')
+WD = os.popen("echo $BeA_ROOT").read().strip('\n')
 
-process.terminate()
 sys.path.append(WD+'/lists')
-os.system("python $BDNM_ROOT/lists/runlists.py")
+os.system("python $BeA_ROOT/lists/runlists.py")
 from runlists import *
+
 
 @given('There is incoming traffic')
 def step_impl(context):

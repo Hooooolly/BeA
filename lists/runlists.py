@@ -1,12 +1,9 @@
 import csv
-import subprocess
+import os
 
 WD = ''
 
-process = subprocess.Popen(['/bin/bash'], shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-process.stdin.write('echo $BDNM_ROOT\n')
-WD = process.stdout.readline().strip('\n')
-process.terminate()
+WD = os.popen("echo $BeA_ROOT").read().strip('\n') #root directory
 
 BlackList = []
 with open(WD+'/lists/blacklist.csv', 'rb') as csvfile:

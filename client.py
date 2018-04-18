@@ -1,8 +1,8 @@
 #################################################
-###  Behave-Driven Network Management Client  ###
+###    Behavior-Driven Architecture Client    ###
 ### Jiayi Wang, Thomas Merod, Flavio Esposito ###
 ### St Louis University, Computer Science Dep.###
-###        Last Edit: Oct 9, 2017             ###
+###        Last Edit: April 28, 2018          ###
 #################################################
 
 import socket
@@ -11,9 +11,9 @@ import sys
 ##Client##
 #GLOBAL VARs#
 
-version = '1.0'
+version = '1.01'
 IP = 'localhost'
-port = 10002
+port = 10000
 
 server_address = (IP, port)
 Controller = 'Ryu'
@@ -22,7 +22,7 @@ Controller = 'Ryu'
 #ACTIONS#
 Create = 'create feature'
 Alter = 'alter feature'
-Excute = 'excute'
+Execute = 'execute'
 SyncList = 'sync list'
 
 
@@ -74,7 +74,7 @@ def isHandshake(message):
             return False
 def welcome():
     print '#'*53
-    print '### Welcom to Behavior-Driven Network Management! ###'
+    print '###    Welcom to Behavior-Driven Architecture!    ###'
     print '###     -- The only English-base network manager! ###'
     print '#'*53
 
@@ -85,17 +85,29 @@ def printResult(result):
 
 def actionMessage():
     ##MESSAGE TYPE, ACTION, CONTENT TYPE, CONTENT##
-    action = ''
+    inp = ''
+    actipn =''
     print '-'*60
-    while action != Create and action != Alter  and action != Excute and action != 'quit' and action!=SyncList:
-        action = raw_input("What is the action that you want to do?\n( excute / create feature / alter feature / sync list / quit ):\n")
+    #while action != Create and action != Alter  and action != Execute and action != 'quit' and action!=SyncList:
+    while inp != 'c' and inp != 'a'  and inp != 'e' and inp != 'q' and inp !='sl':
+        #action = raw_input("What is the action that you want to do?\n( execute / create feature / alter feature / sync list / quit ):\n")
+        inp = raw_input("What is the action that you want to do?\n( e (execute) / c (create feature) / a (alter feature) / sl (sync list) / q (quit) ):\n")
+        if inp == 'c':
+            action = Create
+        elif inp == 'a':
+            action = Alter
+        elif inp == 'e':
+            action = Execute
+        elif inp == 'q':
+            action = Quit
+        elif inp == 'sl':
+            action = SyncList
     #print action
-    if action == 'quit':
+    if action == Quit:
         return QUT
-    elif action == Excute or action ==  Create or  action == Alter:
-        return sp([Action,action,ServiceName,raw_input('Service Name you want to excute or change: ')], spliter)
+    elif action == Execute or action ==  Create or  action == Alter:
+        return sp([Action,action,ServiceName,raw_input('Service Name you want to execute or change: ')], spliter)
     elif action == SyncList:
-        #print 'here'
         List = ''
         op = ''
         while (List != Blacklist or List!= Whitelist) and ( op!= 'add' and op!='remove'):
@@ -175,8 +187,8 @@ while True:
                 ###LISTEN FOR Action Message Reply###
                 ##Action Type, ContentType, Reply Type, Result/Warning
                 elif message[0]== Reply:
-                    if message[1]== Excute :
-                        print 'Received: Excute Reply: '
+                    if message[1]== Execute :
+                        print 'Received: Execute Reply: '
                         #print buff
                         if message[3]== replyRetry:
                             sock.sendall(actionRetry(message[4]))
