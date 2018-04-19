@@ -7,7 +7,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#    http://www.apache.org/licenses/LICENSE-2.0
+#	http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -35,68 +35,68 @@ from ryu.topology import switches
 
 CONF = cfg.CONF
 CONF.register_cli_opts([
-    cfg.ListOpt('app-lists', default=[],
-                help='application module name to run'),
-    cfg.MultiStrOpt('app', positional=True, default=[],
-                    help='application module name to run'),
-    cfg.StrOpt('pid-file', default=None, help='pid file name'),
-    cfg.BoolOpt('enable-debugger', default=False,
-                help='don\'t overwrite Python standard threading library'
-                '(use only for debugging)'),
+	cfg.ListOpt('app-lists', default=[],
+				help='application module name to run'),
+	cfg.MultiStrOpt('app', positional=True, default=[],
+					help='application module name to run'),
+	cfg.StrOpt('pid-file', default=None, help='pid file name'),
+	cfg.BoolOpt('enable-debugger', default=False,
+				help='don\'t overwrite Python standard threading library'
+				'(use only for debugging)'),
 ])
 
 
 def main(args=None, prog=None):
-    
+	
 
-    try:
-        CONF(args=args, prog=prog,
-             project='ryu', version='ryu-manager %s' % version,
-             default_config_files=['/usr/local/etc/ryu/ryu.conf'])
-    except cfg.ConfigFilesNotFoundError:
-        CONF(args=args, prog=prog,
-             project='ryu', version='ryu-manager %s' % version)
+	try:
+		CONF(args=args, prog=prog,
+			 project='ryu', version='ryu-manager %s' % version,
+			 default_config_files=['/usr/local/etc/ryu/ryu.conf'])
+	except cfg.ConfigFilesNotFoundError:
+		CONF(args=args, prog=prog,
+			 project='ryu', version='ryu-manager %s' % version)
 
-    log.init_log()
-    logger = logging.getLogger(__name__)
+	log.init_log()
+	logger = logging.getLogger(__name__)
 
-    if CONF.enable_debugger:
-        msg = 'debugging is available (--enable-debugger option is turned on)'
-        logger.info(msg)
-    else:
-        hub.patch(thread=True)
+	if CONF.enable_debugger:
+		msg = 'debugging is available (--enable-debugger option is turned on)'
+		logger.info(msg)
+	else:
+		hub.patch(thread=True)
 
-    if CONF.pid_file:
-        import os
-        with open(CONF.pid_file, 'w') as pid_file:
-            pid_file.write(str(os.getpid()))
-    app_lists = CONF.app_lists + CONF.app
-    print(app_lists)
-    
+	if CONF.pid_file:
+		import os
+		with open(CONF.pid_file, 'w') as pid_file:
+			pid_file.write(str(os.getpid()))
+	app_lists = CONF.app_lists + CONF.app
+	print(app_lists)
+	
 
-    # keep old behavior, run ofp if no application is specified.
-    if not app_lists:
-        #app_lists = ['ryu.controller.ofp_handler']
+	# keep old behavior, run ofp if no application is specified.
+	if not app_lists:
+		#app_lists = ['ryu.controller.ofp_handler']
 	app_lists = ['ryu.app.simple_switch']
-    app_mgr = AppManager.get_instance()
-    app_mgr.load_apps(app_lists)
-    contexts = app_mgr.create_contexts()
-    services = []
-    services.extend(app_mgr.instantiate_apps(**contexts))
+	app_mgr = AppManager.get_instance()
+	app_mgr.load_apps(app_lists)
+	contexts = app_mgr.create_contexts()
+	services = []
+	services.extend(app_mgr.instantiate_apps(**contexts))
 
-    webapp = wsgi.start_service(app_mgr)
-    if webapp:
-        thr = hub.spawn(webapp)
-        services.append(thr)
+	webapp = wsgi.start_service(app_mgr)
+	if webapp:
+		thr = hub.spawn(webapp)
+		services.append(thr)
 
-    try:
-        hub.joinall(services)
-    except KeyboardInterrupt:
-        logger.debug("Keyboard Interrupt received. "
-                     "Closing RYU application manager...")
-    finally:
-        app_mgr.close()
+	try:
+		hub.joinall(services)
+	except KeyboardInterrupt:
+		logger.debug("Keyboard Interrupt received. "
+					 "Closing RYU application manager...")
+	finally:
+		app_mgr.close()
 
 
 if __name__ == "__main__":
-    main()
+	main()

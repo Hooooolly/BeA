@@ -2,7 +2,7 @@
 ###    Behavior-Driven Architecture Client    ###
 ### Jiayi Wang, Thomas Merod, Flavio Esposito ###
 ### St Louis University, Computer Science Dep.###
-###        Last Edit: April 28, 2018          ###
+###        Ver 1.01 April 28, 2018            ###
 #################################################
 
 import socket
@@ -58,7 +58,7 @@ def sp(list,spliter):
     #put list of items into a string with spliters  
 	temp=''
 	for i in list:
-	    temp = temp+i + spliter
+	   temp = temp+i + spliter
 	return temp[:-len(spliter)]
 
 def handshakeMessage():
@@ -74,8 +74,8 @@ def isHandshake(message):
             return False
 def welcome():
     print '#'*53
-    print '###    Welcom to Behavior-Driven Architecture!    ###'
-    print '###     -- The only English-base network manager! ###'
+    print '###   Welcom to Behavior-Driven Architecture!   ###'
+    print '###   -- The only English-base network manager! ###'
     print '#'*53
 
 def printResult(result): 
