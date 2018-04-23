@@ -1,4 +1,4 @@
-Nfrom behave import *
+from behave import *
 from manager import main
 import os
 import socket

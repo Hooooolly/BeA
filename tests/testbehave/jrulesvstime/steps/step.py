@@ -1,4 +1,4 @@
-#In this step file, there are 2 junk steps before each desired step.
+#In this step file, there are 10 junk steps before each desired step.
 from behave import *
 from manager import main
 import os
@@ -16,6 +16,46 @@ def step_impl(context):
 	pass
 
 @given('There2 is2 incoming2 traffic2')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@given('There3 is3 incoming3 traffic3')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@given('There4 is4 incoming4 traffic4')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@given('There5 is5 incoming5 traffic5')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@given('There6 is6 incoming6 traffic6')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@given('There7 is7 incoming7 traffic7')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@given('There8 is8 incoming8 traffic8')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@given('There9 is9 incoming9 traffic9')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@given('There10 is10 incoming10 traffic10')
 def step_impl(context):
 	print 'aaa'
 	pass
@@ -40,6 +80,46 @@ def step_impl(context):
 	print 'aaa'
 	pass
 
+@when('A3 dangerous3 IP3 is3 detected3')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@when('A4 dangerous4 IP4 is4 detected4')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@when('A5 dangerous5 IP5 is5 detected5')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@when('A6 dangerous6 IP6 is6 detected6')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@when('A7 dangerous7 IP7 is7 detected7')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@when('A8 dangerous8 IP8 is8 detected8')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@when('A9 dangerous9 IP9 is9 detected9')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@when('A10 dangerous10 IP10 is10 detected10')
+def step_impl(context):
+	print 'aaa'
+	pass
+
 
 @when('A dangerous IP is detected')
 def step_impl(context):
@@ -52,6 +132,46 @@ def step_impl(context):
 	pass
 
 @then('Block2 traffic2')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@then('Block3 traffic3')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@then('Block4 traffic4')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@then('Block5 traffic5')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@then('Block6 traffic6')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@then('Block7 traffic7')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@then('Block8 traffic8')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@then('Block9 traffic9')
+def step_impl(context):
+	print 'aaa'
+	pass
+
+@then('Block10 traffic10')
 def step_impl(context):
 	print 'aaa'
 	pass

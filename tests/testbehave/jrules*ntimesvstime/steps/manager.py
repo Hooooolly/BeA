@@ -74,15 +74,15 @@ def main(args=None, prog=None):
     print(app_lists)
     
 
-    # keep old behavior, run ofp if no application is specified.
-    if not app_lists:
-        #app_lists = ['ryu.controller.ofp_handler']
-	app_lists = ['ryu.app.rest_firewall']
-    app_mgr = AppManager.get_instance()
-    app_mgr.load_apps(app_lists)
-    contexts = app_mgr.create_contexts()
-    services = []
-    services.extend(app_mgr.instantiate_apps(**contexts))
+	# keep old behavior, run ofp if no application is specified.
+	if not app_lists:
+		#app_lists = ['ryu.controller.ofp_handler']
+		app_lists = ['ryu.app.rest_firewall']
+	app_mgr = AppManager.get_instance()
+	app_mgr.load_apps(app_lists)
+	contexts = app_mgr.create_contexts()
+	services = []
+	services.extend(app_mgr.instantiate_apps(**contexts))
 
     webapp = wsgi.start_service(app_mgr)
     if webapp:

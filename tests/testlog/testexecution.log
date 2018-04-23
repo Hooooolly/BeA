@@ -1,0 +1,22 @@
+2018-04-19 12:27:38.461544
+Exception IndentationError: expected an indented block (manager.py, line 80)
+2018-04-19 12:28:53.027827
+Exception ImportError: No module named runlists
+2018-04-19 12:31:10.335031
+Feature: Blocking all traffic on a given network # jrules*ntimesvstime.feature:1
+
+  Scenario: Blocking Traffic        # jrules*ntimesvstime.feature:3
+    Given There is incoming traffic # steps/step.py:16
+    When A dangerous IP is detected # steps/step.py:27
+    Then Block traffic              # steps/step.py:34
+--------------------------------------------------------------------------------
+2018-04-19 12:31:13.731113
+Feature: Blocking all traffic on a given network # jrules*ntimesvstime.feature:1
+
+  Scenario: Blocking Traffic        # jrules*ntimesvstime.feature:3
+    Given There is incoming traffic # steps/step.py:16
+    When A dangerous IP is detected # steps/step.py:27
+    Then Block traffic              # steps/step.py:34
+--------------------------------------------------------------------------------
+2018-04-19 12:35:09.806340
+Exception IndentationError: expected an indented block (manager.py, line 80)
