@@ -47,16 +47,16 @@ CONF.register_cli_opts([
 
 
 def main(args=None, prog=None):
-	
 
+        print('aaa')
 	try:
+                print('aaa')
 		CONF(args=args, prog=prog,
 			 project='ryu', version='ryu-manager %s' % version,
 			 default_config_files=['/usr/local/etc/ryu/ryu.conf'])
 	except cfg.ConfigFilesNotFoundError:
 		CONF(args=args, prog=prog,
 			 project='ryu', version='ryu-manager %s' % version)
-
 	log.init_log()
 	logger = logging.getLogger(__name__)
 
@@ -77,20 +77,33 @@ def main(args=None, prog=None):
 	# keep old behavior, run ofp if no application is specified.
 	if not app_lists:
 		#app_lists = ['ryu.controller.ofp_handler']
-	app_lists = ['ryu.app.rest_firewall']
+		print('bbb')
+		app_lists = ['ryu.app.rest_firewall']
+	
 	app_mgr = AppManager.get_instance()
 	app_mgr.load_apps(app_lists)
 	contexts = app_mgr.create_contexts()
+	print('contexts:')
+	print(contexts)
+	
 	services = []
 	services.extend(app_mgr.instantiate_apps(**contexts))
-
+	
 	webapp = wsgi.start_service(app_mgr)
+	print('ccc')
+	print(webapp)
 	if webapp:
 		thr = hub.spawn(webapp)
 		services.append(thr)
-
+	print('ddd')
 	try:
+		print(services[0])
+		services[1].wait()
+		print('eee3')
+		services[0].wait()
+		print('eee')
 		hub.joinall(services)
+		print('fff')
 	except KeyboardInterrupt:
 		logger.debug("Keyboard Interrupt received. "
 			"Closing RYU application manager...")
